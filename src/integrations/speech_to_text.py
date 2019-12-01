@@ -4,17 +4,17 @@ import os
 from google.cloud import speech
 from google.cloud.speech import enums
 from google.cloud.speech import types
+import io
 
 
 class SpeechToText:
 
     @staticmethod
-    def speech_to_text():
-        import io
+    async def speech_to_text(audio_path):
         # Instantiates a client
         client = speech.SpeechClient()
 
-        file_name = os.path.join(os.path.dirname(__file__), 'audio.flac')
+        file_name = os.path.join(os.path.dirname(__file__), audio_path)
 
         # Loads the audio into memory
         try:
