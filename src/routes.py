@@ -8,5 +8,5 @@ def setup_routes(app):
     :param app:
     """
     app.router.add_post('/api/pitter/v1/message', send_message)
-    app.router.add_get('/voice', speechRecognition)
+    app.router.add_post('/voice/', speechRecognition)
 
