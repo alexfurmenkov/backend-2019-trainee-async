@@ -23,5 +23,5 @@ async def speechRecognition(request):
     try:
         r = requests.post(url=url, data=data)
         return web.Response(text=audio_decoded)
-    except requests.RequestException:
+    except requests.ConnectionError:
         return web.Response(text='Unable to connect to the server.')
