@@ -38,7 +38,7 @@ class SpeechToText:
         for top_results in response.results:
             for inside_results in top_results.alternatives:
                 phrase = inside_results.transcript
-        return phrase
+        return base64.b64encode(phrase.encode('utf-8'))
 
 
 
