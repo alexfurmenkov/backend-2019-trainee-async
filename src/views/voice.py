@@ -1,9 +1,13 @@
+import requests
 from aiohttp import web
 from integrations.speech_to_text import SpeechToText
-import requests
 
 
-async def speechRecognition(request):
+async def speechrecognition(request):
+    """
+    Speech recognition
+    :return: Sends data to localhost:8000 with decoded audio
+    """
     data = None
     query_data = {}
 
@@ -18,7 +22,7 @@ async def speechRecognition(request):
     print(query_data)
     url = 'http://localhost:8000/savepitt/'
     try:
-        r = requests.post(url=url, data=query_data)
+        requests.post(url=url, data=query_data)
         return web.Response(text='success')
     except requests.ConnectionError:
         return web.Response(text='Unable to connect to the server.')

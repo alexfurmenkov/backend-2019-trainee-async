@@ -1,16 +1,21 @@
 import base64
 import os
+import io
 # Imports the Google Cloud client library
 from google.cloud import speech
 from google.cloud.speech import enums
 from google.cloud.speech import types
-import io
 
 
 class SpeechToText:
 
     @staticmethod
     async def speech_to_text(audio_path):
+        """
+        Recognises text in audio file and returns it
+        :param audio_path: Path of the audio to be recognised
+        :return: Decoded text
+        """
         # Instantiates a client
         client = speech.SpeechClient()
 
@@ -39,11 +44,3 @@ class SpeechToText:
             for inside_results in top_results.alternatives:
                 phrase = inside_results.transcript
         return base64.b64encode(phrase.encode('utf-8'))
-
-
-
-
-
-
-
-
