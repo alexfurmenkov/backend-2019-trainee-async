@@ -25,9 +25,12 @@ class SpeechToText:
 
         # Loads the audio into memory
         discr_freq = 48000
-        with io.open(file_name, 'rb') as audio_file:
-            content = audio_file.read()
-            content_encoded = base64.b64encode(content)
+        try:
+            with io.open(file_name, 'rb') as audio_file:
+                content = audio_file.read()
+                content_encoded = base64.b64encode(content)
+        except FileNotFoundError:
+            return 'No such file.'
 
         config = types.RecognitionConfig(
             encoding=enums.RecognitionConfig.AudioEncoding.FLAC,
