@@ -28,7 +28,6 @@ class SpeechToText:
         try:
             with io.open(file_name, 'rb') as audio_file:
                 content = audio_file.read()
-                content_encoded = base64.b64encode(content)
         except FileNotFoundError:
             return 'No such file.'
 
@@ -38,9 +37,8 @@ class SpeechToText:
             language_code='en-US')
 
         # Detects speech in the audio file
-        content_decoded = base64.b64decode(content_encoded)
-        audio_decoded = types.RecognitionAudio(content=content_decoded)
-        response = client.recognize(config, audio_decoded)
+        audio = types.RecognitionAudio(content)
+        response = client.recognize(config, audio)
         phrase = ''
 
         for top_results in response.results:
